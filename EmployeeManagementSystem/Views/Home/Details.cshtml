@@ -1,0 +1,25 @@
+﻿@model HomeDetailsViewModel
+@{
+    ViewBag.Title = "Employee Details";
+    var employeePhoto = "~/Images/" + (Model.Employee.PhotoPath ?? "user-clipart-matt-icons_preferences-desktop-personal.png");
+}
+<div class="row justify-content-center">
+    <input hidden asp-for="@Model.ID"/>
+    <div class="col-sm-8">
+        <div class="card">
+            <div class="card-body">
+                <img class="card-img-top" height="400" src="@employeePhoto" asp-append-version="true"/>
+                <h3 class="card-title">Name: @Model.Employee.Name</h3>
+                <h5 class="card-text">Email: @Model.Employee.Email</h5>
+                <h5 class="card-text">Department: @Model.Employee.Deparment</h5>
+            </div>
+            <div class="card-footer">
+                <a asp-controller="Home" asp-action="Index" class="btn btn-success">Back</a>
+                <a asp-controller="Home" asp-action="Edit" asp-route-id="@Model.Employee.ID" class="btn btn-primary">Edit</a>
+                <a asp-action="Delete" asp-controller="Home" class="btn btn-danger" asp-route-id="@Model.Employee.ID">Delete</a>
+            </div>
+        </div>
+        <br />
+    </div>
+</div>
+

@@ -1,0 +1,49 @@
+﻿@model RoleEditViewModel
+@{ 
+    ViewBag.Title = "Edit role";
+}
+    <form method="post">
+        <div class="form-group">
+            <label class="col-form-label  col-md-12" asp-for="ID"></label>
+            <div class="col-md-12">
+                <input class="form-control" disabled asp-for="ID" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-12">
+                <label class="col-form-label" asp-for="RoleName"></label>
+            </div>
+                <div class="col-md-12">
+                    <input class="form-control" asp-for="RoleName" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-12">
+                    <button class="btn btn-primary" type="submit">Update</button>
+                    <a class="btn btn-success" asp-action="RoleList" asp-controller="Administrator">Cancel</a>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>User in this role</h3>
+                    </div>
+                    <div class="card-body">
+                        @if (Model.RoleMembers.Any())
+                        {
+                            @foreach (var i in Model.RoleMembers)
+                            {
+                                <h4 class="card-text">@i</h4>
+                            }
+                        }
+                        else
+                        {
+                            <h4>No user in role at this moment</h4>
+                        }
+                    </div>
+                    <div class="card-footer">
+                        <a class="btn btn-success" asp-route-id="@Model.ID" asp-action="UpdateUserInRole" asp-controller="Administrator" style="width:auto;">Add or Remove User</a>
+                    </div>
+                </div>
+            </div>
+</form>

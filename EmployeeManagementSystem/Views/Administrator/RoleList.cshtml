@@ -1,0 +1,44 @@
+﻿@model IEnumerable<IdentityRole>
+@{ 
+    ViewBag.Title = "Role List";
+}
+<h1>Role List</h1>
+<hr />
+<div class="container">
+
+    <div class="mb-2">
+        <a asp-action="CreateRole" asp-controller="Administrator" class="btn btn-primary" style="width: auto">Create New Role</a>
+    </div>
+    @foreach (var role in Model)
+    {
+        <div class="row">
+            <div class="col-md-12 mb-1">
+                <div class="card">
+                    <div class="card-header">
+                        <div>@role.Id</div>
+                    </div>
+                    <div class="card-body">
+                        <h1 class="card-title">@role.Name</h1>
+                    </div>
+                    <div class="card-footer">
+                        <form asp-action="DeleteRole" asp-controller="Administrator" asp-route-id="@role.Id" method="post">
+                            <a asp-action="EditRole" asp-controller="Administrator" asp-route-id="@role.Id" class="btn btn-success">Edit</a>
+                            <span id="deleteBtn_@role.Id">
+                                <a class="btn btn-danger" onclick="ConfirmDelete('@role.Id', true)" href="#">Delete</a>
+                            </span>
+                            <span style="display:none" id="noDeleteBtn_@role.Id">Are you sure to delete?
+                                <button type="submit" class="btn btn-danger">Yes</button>
+                                <a class="btn btn-success" onclick="ConfirmDelete('@role.Id', false)" href="#">No</a>
+                            </span>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    }
+</div>
+@section Scripts{ 
+    <script src="~/JS/DeleteRoleBtn.js"></script>
+}
+
